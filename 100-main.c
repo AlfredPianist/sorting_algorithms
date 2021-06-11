@@ -13,7 +13,7 @@ int main(void)
 	/* int array[] = {8, 83, 67, 35, 43, 89, 12, 78, 17, 54, */
 	/* 	       29, 95, 22, 40, 39, 42, 91, 27, 13, 16}; */
 	/* int array[] = {1}; */
-
+	/* int array[] = {34, 5}; */
 	size_t n = sizeof(array) / sizeof(array[0]);
 
 	print_array(array, n);
