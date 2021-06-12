@@ -32,6 +32,7 @@ void cocktail_sort_list(listint_t **list);
 void swap_nodes(listint_t **list, listint_t *node_1, listint_t *node_2);
 void counting_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void merge_arrays(int *array, size_t size0, size_t size1);
 void heap_sort(int *array, size_t size);
 void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
