@@ -1,69 +1,90 @@
 #include "sort.h"
 
 /**
- * radix_sort - Radix sort implementation.
+ * radix_sort - Radix sort implementation w/ array copy.
  * @array: Array to sort.
  * @size: Array's size.
  */
 void radix_sort(int *array, size_t size)
 {
-	unsigned short i, j, bucket_idx, lsd, keep_going = 1;
+	unsigned short i, j, bucket_idx, keep_going = 1;
 	listint_t **buckets, **tails;
+	array_t **array_cpy;
 
 	buckets = malloc(sizeof(*buckets) * 10);
 	tails = malloc(sizeof(*tails) * 10);
-
-	if (!buckets || !tails)
+	array_cpy = malloc(sizeof(*array_cpy) * size);
+	if (!buckets || !tails || !array_cpy)
 	{
 		if (buckets)
 			free(buckets);
 		if (tails)
 			free(tails);
+		if (array_cpy)
+			free(array_cpy);
 		exit(1);
 	}
 	for (i = 0; i < 10; i++)
 		buckets[i] = tails[i] = NULL;
+	for (i = 0; i < size; i++)
+	{
+		array_cpy[i] = malloc(sizeof(**array_cpy));
+		if (!array_cpy[i])
+		{
+			for (j = 0; j <= i; j++)
+				free(array_cpy[j]);
+			free(array_cpy);
+			if (buckets)
+				free(buckets);
+			if (tails)
+				free(tails);
+			exit(1);
+		}
+		array_cpy[i]->orig_n = array_cpy[i]->mod_n = array[i];
+	}
 
-	for (j = lsd = 0; keep_going; j = 0, lsd++)
+	for (j = 0; keep_going; j = 0)
 	{
 		keep_going = 0;
 		for (i = 0; i < size; i++)
 		{
-			bucket_idx = get_digit(array[i], lsd);
+			bucket_idx = get_digit(array_cpy, i);
 			keep_going = bucket_idx != 0 ? 1 : 0;
-			push(buckets + bucket_idx, tails + bucket_idx, array[i]);
+			push(buckets + bucket_idx, tails + bucket_idx, array_cpy[i]);
 		}
 		if (keep_going == 0)
 			break;
 		for (i = 0; i < 10; i++)
 			while (buckets[i])
 			{
-				array[j] = pop(buckets + i, tails + i);
+				free(array_cpy[j]);
+				array_cpy[j] = pop(buckets + i, tails + i);
+				array[j] = array_cpy[j]->orig_n;
 				j++;
 			}
 		print_array(array, size);
 	}
+	for (i = 0; i < size; i++)
+		free(array_cpy[i]);
 	free_list(buckets[0]);
-	free(buckets), free(tails);
+	free(buckets), free(tails), free(array_cpy);
 }
 
 /**
- * get_digit - Gets the least significant digit passed as parameter of
- *             a given number.
- * @num: The number to be checked.
- * @digit: The position of the least significant digit beginning with 0.
+ * get_digit - Gets the least significant digit of a given number.
+ * @array: The array to retrieve the number to be checked.
+ * @idx: The index of the array.
  *
  * Return: The digit asked.
  */
-int get_digit(int num, int digit)
+int get_digit(array_t **array, int idx)
 {
-	int i, pow_ten = 1;
+	int digit;
 
-	for (i = 0; i < digit; i++)
-		pow_ten *= 10;
+	digit = array[idx]->mod_n % 10;
+	array[idx]->mod_n /= 10;
 
-	return ((num % (pow_ten * 10) - num % pow_ten)
-		/ pow_ten);
+	return (digit);
 }
 
 /**
@@ -75,7 +96,7 @@ int get_digit(int num, int digit)
  *
  * Return: The new node.
  */
-listint_t *push(listint_t **bucket, listint_t **tail, int num)
+listint_t *push(listint_t **bucket, listint_t **tail, array_t *num)
 {
 	listint_t *newnode, *h;
 
@@ -88,7 +109,9 @@ listint_t *push(listint_t **bucket, listint_t **tail, int num)
 	if (!newnode)
 		exit(1);
 
-	*(int *)&(newnode->n) = num;
+	*(int *)&(newnode->n) = num->orig_n;
+	newnode->mod_n = num->mod_n;
+
 	newnode->prev = NULL;
 	newnode->next = h;
 	if (bucket && *bucket)
@@ -110,12 +133,16 @@ listint_t *push(listint_t **bucket, listint_t **tail, int num)
  *
  * Return: The number of the freed node.
  */
-int pop(listint_t **bucket, listint_t **tail)
+array_t *pop(listint_t **bucket, listint_t **tail)
 {
 	listint_t *remove;
-	int num;
+	array_t *num;
 
 	if (!*tail || !*bucket)
+		exit(1);
+
+	num = malloc(sizeof(num));
+	if (!num)
 		exit(1);
 
 	remove = *tail;
@@ -124,7 +151,9 @@ int pop(listint_t **bucket, listint_t **tail)
 	else
 		*tail = *bucket = NULL;
 
-	num = remove->n;
+	num->orig_n = remove->n;
+	num->mod_n = remove->mod_n;
+
 	free(remove);
 
 	return (num);
