@@ -46,6 +46,11 @@ void sift_down(int *array, size_t size, size_t i, size_t osize);
 void swap(int *num_1, int *num_2);
 
 void radix_sort(int *array, size_t size);
+listint_t *push(listint_t **bucket, listint_t **tail, int num);
+int pop(listint_t **bucket, listint_t **tail);
+int get_digit(int num, int digit);
+void free_list(listint_t *list);
+
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 
