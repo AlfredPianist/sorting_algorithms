@@ -30,7 +30,8 @@ void radix_sort(int *array, size_t size)
 		for (i = 0; i < size; i++)
 		{
 			bucket_idx = get_digit(array[i], lsd);
-			keep_going = bucket_idx != 0 ? 1 : 0;
+			if (bucket_idx != 0)
+				keep_going = 1;
 			push(buckets + bucket_idx, tails + bucket_idx, array[i]);
 		}
 		if (keep_going == 0)
