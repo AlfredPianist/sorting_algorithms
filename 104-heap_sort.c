@@ -65,8 +65,9 @@ void sift_down(int *array, size_t size, size_t i, size_t osize)
 		sift_down(array, size, max, osize);
 	}
 }
+
 /**
- * Swap - Swaps two int variables.
+ * swap - Swaps two int variables.
  * @num_1: Pointer for first variable.
  * @num_2: Pointer for second variable.
  */
