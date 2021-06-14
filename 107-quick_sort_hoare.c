@@ -1,70 +1,57 @@
 #include "sort.h"
 
 /**
- * bitonic_sort - Bitonic sort implementation.
+ * quick_sort_hoare - Quick sort implementation. (Hoare scheque)
  * @array: Array to sort.
  * @size: Array's size.
  */
-void bitonic_sort(int *array, size_t size)
+void quick_sort_hoare(int *array, size_t size)
 {
-	if (array == NULL)
+	if (!array || size <= 1)
 		return;
 
-	recursive_bitonic_sort(array, size, 1, size);
+	recursive_hoare(array, size, array, size);
 }
 
 /**
- * recursive_bitonic_sort - Recursive Bitonic sort implementation.
+ * recursive_hoare - Recursive quick sort implementation. (Hoare scheque)
  * @array: Array to sort.
  * @size: Array's size.
- * @dir: Sorting direction, 1 is ascending, 0 is descending
- * @osize: Original array's size
+ * @oarray: original array
+ * @osize: original array's size
  */
-void recursive_bitonic_sort(int *array, size_t size, int dir, size_t osize)
+void recursive_hoare(int *array, size_t size, int *oarray, size_t osize)
 {
-	unsigned int k;
+	unsigned int lo = 0, hi;
+	int p, tmp;
 
 	if (size <= 1)
 		return;
 
-	k = size / 2;
-	printf("Merging [%lu/%lu] (%s):\n", size, osize, dir == 1 ? "UP" : "DOWN");
-	print_array(array, size);
-	recursive_bitonic_sort(array, k, 1, osize);
-	recursive_bitonic_sort(array + k, k, 0, osize);
-	merge_bitonic_sort(array, size, dir, osize, 1);
-}
-
-/**
- * merge_bitonic_sort - merge two consecutive and bitonic arrays
- * @array: Array to sort.
- * @size: Array's size.
- * @dir: Sorting direction, 1 is ascending, 0 is descending
- * @osize: Original array's size
- * @print: flat to print result after merging, if is set to 1 the result
- * is printed, if it's set to cero the result is not printed
- */
-void merge_bitonic_sort(int *array, size_t size,
-			int dir, size_t osize, int print)
-{
-	unsigned int i, k;
-	int tmp;
-
-	if (size <= 1)
-		return;
-
-	k = size / 2;
-
-	for (i = 0; i < k; i++)
+	hi = size - 1;
+	p = array[size - 1];
+	while (lo < hi)
 	{
-		if ((array[i + k] > array[i]) != dir)
-			tmp = array[i], array[i] = array[i + k], array[i + k] = tmp;
+		if (array[lo] < p)
+			lo++;
+		else
+		{
+			if (array[hi] > p)
+				hi--;
+			else
+			{
+				swap(array + lo, array + hi);
+				tmp = array[lo];
+				array[lo] = array[hi];
+				array[hi] = tmp;
+				hi--;
+				lo++;
+				print_array(oarray, osize);
+			}
+		}
 	}
-	merge_bitonic_sort(array, k, dir, osize, 0);
-	merge_bitonic_sort(array + k, k, dir, osize, 0);
-	if (print)
-	{
-		printf("Result [%lu/%lu] (%s):\n", size, osize, dir == 1 ? "UP" : "DOWN");
-		print_array(array, size);
-	}
+	if (lo == hi && array[lo] < p)
+		lo++;
+	recursive_hoare(array, lo, oarray, osize);
+	recursive_hoare(array + lo, size - lo, oarray, osize);
 }

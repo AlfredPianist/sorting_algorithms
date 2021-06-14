@@ -58,5 +58,7 @@ void merge_bitonic_sort(int *array, size_t size, int dir,
 			size_t osize, int print);
 
 void quick_sort_hoare(int *array, size_t size);
+void recursive_hoare(int *array, size_t size, int *oarray, size_t osize);
+void swap(int *a, int *b);
 
 #endif
