@@ -1,22 +1,24 @@
 #include "sort.h"
 
 /**
- * quick_sort - Quick sort implementation
- * (Lomuto partition scheme)
+ * quick_sort - Quick sort implementation (Lomuto partition scheme).
  * @array: The array to be sorted.
  * @size: The size of the array.
  */
 void quick_sort(int *array, size_t size)
 {
+	if (!array || size < 1)
+		return;
+
 	recursive_quick_sort(array, size, array, size);
 }
 
 
 /**
  * recursive_quick_sort - Recursive quick sort implementation
- * (Lomuto partition scheme)
- * @oarray: Original array to sort
- * @osize: Original array's size
+ *                        (Lomuto partition scheme).
+ * @oarray: Original array to sort.
+ * @osize: Original array's size.
  * @array: The array to be sorted.
  * @size: The size of the array.
  */
