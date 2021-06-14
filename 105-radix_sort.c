@@ -10,9 +10,11 @@ void radix_sort(int *array, size_t size)
 	unsigned short i, j, bucket_idx, lsd, keep_going = 1;
 	listint_t **buckets, **tails;
 
+	if (!array || size < 1)
+		return;
+
 	buckets = malloc(sizeof(*buckets) * 10);
 	tails = malloc(sizeof(*tails) * 10);
-
 	if (!buckets || !tails)
 	{
 		if (buckets)
@@ -44,8 +46,7 @@ void radix_sort(int *array, size_t size)
 			}
 		print_array(array, size);
 	}
-	free_list(buckets[0]);
-	free(buckets), free(tails);
+	free_list(buckets[0]), free(buckets), free(tails);
 }
 
 /**
