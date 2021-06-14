@@ -10,7 +10,7 @@ void radix_sort(int *array, size_t size)
 	unsigned short i, j, bucket_idx, lsd, keep_going = 1;
 	listint_t **buckets, **tails;
 
-	if (!array || size < 1)
+	if (!array || size <= 1)
 		return;
 
 	buckets = malloc(sizeof(*buckets) * 10);
