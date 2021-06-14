@@ -40,7 +40,6 @@ void recursive_hoare(int *array, size_t size, int *oarray, size_t osize)
 				hi--;
 			else
 			{
-				swap(array + lo, array + hi);
 				tmp = array[lo];
 				array[lo] = array[hi];
 				array[hi] = tmp;
