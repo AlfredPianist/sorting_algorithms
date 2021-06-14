@@ -62,15 +62,6 @@ int main(void)
 	deck = init_deck(cards);
 	print_deck(deck);
 	printf("\n");
-
-	/* printf("%d\n", comp_cards(deck->next, deck->next)); */
-	/* printf("%d\n", comp_cards(deck, deck->next->next)); */
-	/* printf("%d\n", comp_cards(deck, deck->next->next->next)); */
-	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next)); */
-	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next->next)); */
-	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next->next->next)); */
-
-
 	sort_deck(&deck);
 	printf("\n");
 	print_deck(deck);
