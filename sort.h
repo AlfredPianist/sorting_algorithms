@@ -56,6 +56,7 @@ void bitonic_sort(int *array, size_t size);
 void recursive_bitonic_sort(int *array, size_t size, int dir, size_t osize);
 void merge_bitonic_sort(int *array, size_t size, int dir,
 			size_t osize, int print);
+
 void quick_sort_hoare(int *array, size_t size);
 
 #endif
