@@ -2,6 +2,16 @@
 
 #define DECK_H
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+typedef struct card_value
+{
+	char *text;
+	int value;
+} card_value;
+
 typedef enum kind_e
 {
 	SPADE = 0,
@@ -38,6 +48,8 @@ typedef struct deck_node_s
 } deck_node_t;
 
 void sort_deck(deck_node_t **deck);
-
+int comp_cards(const deck_node_t *a, const deck_node_t *b);
+void reorg_deck(deck_node_t **deck, deck_node_t *order[52]);
+void selection_sort_deck(deck_node_t **array, size_t size);
 #endif
 

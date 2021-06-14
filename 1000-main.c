@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "deck.h"
 
 void print_deck(const deck_node_t *deck)
@@ -64,8 +62,20 @@ int main(void)
 	deck = init_deck(cards);
 	print_deck(deck);
 	printf("\n");
+
+	/* printf("%d\n", comp_cards(deck->next, deck->next)); */
+	/* printf("%d\n", comp_cards(deck, deck->next->next)); */
+	/* printf("%d\n", comp_cards(deck, deck->next->next->next)); */
+	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next)); */
+	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next->next)); */
+	/* printf("%d\n", comp_cards(deck, deck->next->next->next->next->next->next)); */
+
+
 	sort_deck(&deck);
 	printf("\n");
 	print_deck(deck);
+
+
+
 	return (0);
 }
