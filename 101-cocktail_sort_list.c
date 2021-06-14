@@ -14,7 +14,7 @@ void cocktail_sort_list(listint_t **list)
 	current = lo = *list;
 	hi = NULL;
 
-	while (lo < hi || hi == NULL)
+	while (hi == NULL || lo->n < hi->n)
 	{
 		/* Up */
 		while (current->next != NULL && current != hi)
