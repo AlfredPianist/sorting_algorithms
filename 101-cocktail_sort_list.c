@@ -1,8 +1,8 @@
 #include "sort.h"
 
 /**
- * cocktail_sort_list - cocktail sort implementation
- * @list: double pointer to double linked list
+ * cocktail_sort_list - Cocktail shaker sort implementation.
+ * @list: The list to be sorted.
  */
 void cocktail_sort_list(listint_t **list)
 {
@@ -13,11 +13,9 @@ void cocktail_sort_list(listint_t **list)
 
 	current = lo = *list;
 	hi = NULL;
-
-	while (hi == NULL || (lo != hi && lo->prev != hi))
+	while (!hi || (lo != hi && lo->prev != hi))
 	{
-		/* Up */
-		while (current->next != NULL && current != hi)
+		while (current->next && current != hi)
 		{
 			if (current->n > current->next->n)
 			{
@@ -29,12 +27,11 @@ void cocktail_sort_list(listint_t **list)
 			}
 			else
 				current = current->next;
-			if (current->next == NULL)
+			if (!current->next)
 				hi = current->prev;
 		}
 		current = hi;
-
-		while (current->prev != NULL && current != lo)
+		while (current->prev && current != lo)
 		{
 			if (current->n < current->prev->n)
 			{
@@ -52,13 +49,12 @@ void cocktail_sort_list(listint_t **list)
 }
 
 /**
- * swap_nodes - swap node_1 and node_2 from double linked list list
- * node_1 and node_2 are adyacent nodes
- * @list: double pointer to double linked list
- * @node_1: node 1
- * @node_2: node 2
+ * swap_nodes - Swap node_1 and node_2 from doubly-linked list.
+ *              Node_1 and node_2 are adjacent nodes.
+ * @list: The list to be sorted.
+ * @node_1: Node 1.
+ * @node_2: Node 2.
 */
-
 void swap_nodes(listint_t **list, listint_t *node_1, listint_t *node_2)
 {
 	node_1->next = node_2->next;
