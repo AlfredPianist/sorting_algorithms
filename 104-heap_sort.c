@@ -1,15 +1,18 @@
 #include "sort.h"
 
 /**
- * heap_sort - heap sort implementation
- * @array: array to sort
- * @size: array's size
+ * heap_sort - Heap sort implementation.
+ * @array: Array to sort.
+ * @size: Array's size.
  */
 void heap_sort(int *array, size_t size)
 {
 	int i;
 
-	buildMaxHeap(array, size);
+	if (!array || size < 1)
+		return;
+
+	build_heap(array, size);
 	for (i = size - 1; i > 0; i--)
 	{
 		swap(array, array + i);
@@ -19,11 +22,11 @@ void heap_sort(int *array, size_t size)
 }
 
 /**
- * buildMaxHeap - sort heap data structure bottom-up
- * @array: array to sort
- * @size: array's size
+ * build_heap - Build heap data structure.
+ * @array: Array to sort.
+ * @size: Array's size.
  */
-void buildMaxHeap(int *array, size_t size)
+void build_heap(int *array, size_t size)
 {
 	int i = 0;
 
@@ -32,12 +35,12 @@ void buildMaxHeap(int *array, size_t size)
 }
 
 /**
- * sift_down - sort recursively branch starting from index i
- * in heap data structure
- * @array: array to sort
- * @size: array's size
- * @i: branch starting index
- * @osize: original array's size for printing purposes
+ * sift_down - Sort recursively branch starting from index i
+ *             in heap data structure.
+ * @array: Array to sort.
+ * @size: Array's size.
+ * @i: Branch starting index.
+ * @osize: Original array's size for printing purposes.
  */
 void sift_down(int *array, size_t size, size_t i, size_t osize)
 {
@@ -63,9 +66,9 @@ void sift_down(int *array, size_t size, size_t i, size_t osize)
 	}
 }
 /**
- * swap - swap two int variables
- * @num_1: pointer for first variable
- * @num_2: pointer for second variable
+ * Swap - Swaps two int variables.
+ * @num_1: Pointer for first variable.
+ * @num_2: Pointer for second variable.
  */
 void swap(int *num_1, int *num_2)
 {

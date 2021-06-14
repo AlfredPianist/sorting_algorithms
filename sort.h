@@ -41,7 +41,7 @@ void merge_sort(int *array, size_t size);
 void merge_arrays(int *array, size_t size0, size_t size1);
 
 void heap_sort(int *array, size_t size);
-void buildMaxHeap(int *array, size_t size);
+void build_heap(int *array, size_t size);
 void sift_down(int *array, size_t size, size_t i, size_t osize);
 void swap(int *num_1, int *num_2);
 
