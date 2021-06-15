@@ -6,12 +6,26 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * struct card_value - value of a card
+ *
+ * @value: Numeric value of text
+ * From "Ace" to "King"
+ * @text: Kind of the card
+ */
 typedef struct card_value
 {
 	char *text;
 	int value;
 } card_value;
 
+/**
+ * enum kind_e - numeric values for kinds of cards
+ * @SPADE: spade value 0
+ * @HEART: heart value 1
+ * @CLUB: club value 2
+ * @DIAMOND: diamond value 3
+ */
 typedef enum kind_e
 {
 	SPADE = 0,

@@ -1,5 +1,9 @@
 #include "deck.h"
 
+/**
+ * print_deck - print deck
+ * @deck: deck
+ */
 void print_deck(const deck_node_t *deck)
 {
 	size_t i;
@@ -18,6 +22,11 @@ void print_deck(const deck_node_t *deck)
 	}
 }
 
+/**
+ * init_deck - initialize double linked list from cards
+ * @cards: array of cards
+ * Return: Double linked list from cards
+ */
 deck_node_t *init_deck(const card_t cards[52])
 {
 	deck_node_t *deck;
@@ -41,6 +50,10 @@ deck_node_t *init_deck(const card_t cards[52])
 	return (deck);
 }
 
+/**
+ * main - main function where a deck is sorted
+ * Return: cero
+ */
 int main(void)
 {
 	card_t cards[52] = {
