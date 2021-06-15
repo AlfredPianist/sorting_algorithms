@@ -1,12 +1,13 @@
 #include "deck.h"
 
 /**
- * comp_cards - compare two cards from double linked list
- * @a: first card
- * @b: second card
- * Return: return a positive value if first card is bigger than
- * the second one, negative value if the oposite or cero if the
- * cards are equal
+ * comp_cards - Compare two cards from double linked list.
+ * @a: First card.
+ * @b: Second card.
+ *
+ * Return: Returns a positive value if first card is bigger than
+ *         the second one, negative value if the oposite or cero if the
+ *         cards are equal.
  */
 int comp_cards(const deck_node_t *a, const deck_node_t *b)
 {
@@ -31,9 +32,9 @@ int comp_cards(const deck_node_t *a, const deck_node_t *b)
 
 /**
  * reorg_deck - Organize doble linked list deck according to the
- * pointers in array of pointers order
- * @deck: deck to organize
- * @order: order of pointers
+ *              pointers in array of pointers order.
+ * @deck: Deck to organize.
+ * @order: Order of pointers.
  */
 void reorg_deck(deck_node_t **deck, deck_node_t *order[52])
 {
@@ -52,8 +53,8 @@ void reorg_deck(deck_node_t **deck, deck_node_t *order[52])
 }
 
 /**
- * sort_deck - sort a double linked list deck of cards using selection sort
- * @deck: deck
+ * sort_deck - Sort a double linked list deck of cards using selection sort.
+ * @deck: Deck.
  */
 void sort_deck(deck_node_t **deck)
 {
@@ -72,8 +73,8 @@ void sort_deck(deck_node_t **deck)
 }
 
 /**
- * selection_sort_deck - sort an array of pointers to the card's nodes
- * of a double linked list
+ * selection_sort_deck - Sort an array of pointers to the card's nodes
+ *                       of a double linked list.
  * @array: The array to be sorted.
  * @size: The size of the array.
  */
